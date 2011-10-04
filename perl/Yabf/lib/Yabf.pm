@@ -36,12 +36,12 @@ sub evaluate {
 
     for (my $i = 0 ; $i < length $expr ; $i++)  {
         my $op = substr($expr, $i, 1);
-        for ($op) {
-            if (/>/) { $data_pointer++ }
-            if (/</) { if ($data_pointer) { $data_pointer-- } }
-            if (/\+/) { $buffer[$data_pointer]++ }
-            if (/-/) { $buffer[$data_pointer]-- }
-            if (/\[/) {
+        given ($op) {
+            when ('>') { $data_pointer++ }
+            when ('<') { $data_pointer-- if ($data_pointer) }
+            when ('+') { $buffer[$data_pointer]++ }
+            when ('-') { $buffer[$data_pointer]-- }
+            when ('[') {
                 if ($buffer[$data_pointer] == 0) {
                     while (substr($expr, $i, 1) ne ']') {
                         $i++;
