@@ -52,6 +52,7 @@ array_is(eval_to_buffer("+>+-<-"), [0, 0], "+>+-<- resets position 0 and 1");
 
 array_is(eval_to_buffer("+[-]"), [0], "+[-] resets position 0 to 0");
 array_is(eval_to_buffer("[-]"), [0], "[-] does nothing (keep position 0 as 0)");
+array_is(eval_to_buffer("+[>+<-]"), [0, 1], "+[>+<-] resets position 0 and increments position 1");
 
 
 done_testing();
