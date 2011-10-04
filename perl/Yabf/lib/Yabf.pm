@@ -39,7 +39,7 @@ sub evaluate {
             if (/</) { if ($data_pointer) { $data_pointer-- } }
         }
     }
-    $data_pointer;
+    (data_pointer => $data_pointer);
 }
 
 
