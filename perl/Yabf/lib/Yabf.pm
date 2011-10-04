@@ -41,6 +41,13 @@ sub evaluate {
             if (/</) { if ($data_pointer) { $data_pointer-- } }
             if (/\+/) { $buffer[$data_pointer]++ }
             if (/-/) { $buffer[$data_pointer]-- }
+            if (/\[/) {
+                if ($buffer[$data_pointer] == 0) {
+                    while (substr($expr, $i, 1) ne ']') {
+                        $i++;
+                    }
+                }
+            }
         }
     }
     {data_pointer => $data_pointer,

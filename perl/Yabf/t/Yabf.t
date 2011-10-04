@@ -3,16 +3,17 @@ use warnings;
 use 5.010;
 use Yabf;
 use Test::More;
+use Data::Dumper;
 
 sub array_is {
     my ($result_ref, $expected_ref, $msg) = @_;
     my @result = @{$result_ref};
     my @expected = @{$expected_ref};
 
-    return fail($msg) if (scalar @result) != (scalar @expected);
+    return fail(Dumper(\@expected, \@result)) if (scalar @result) != (scalar @expected);
 
     for (my $i = 0 ; $i < scalar @expected ; $i++) {
-        return fail($msg) if $expected[$i] != $result[$i];
+        return fail(Dumper(\@expected, \@result)) if $expected[$i] != $result[$i];
     }
     pass $msg;
 }
@@ -48,6 +49,9 @@ array_is(eval_to_buffer(">-"), [0, -1], "- decrements position 1 to -1");
 
 array_is(eval_to_buffer(">++-"), [0, 1], ">++- sets position 1 to 1");
 array_is(eval_to_buffer("+>+-<-"), [0, 0], "+>+-<- resets position 0 and 1");
+
+array_is(eval_to_buffer("+[-]"), [0], "+[-] resets position 0 to 0");
+array_is(eval_to_buffer("[-]"), [0], "[-] does nothing (keep position 0 as 0)");
 
 
 done_testing();
