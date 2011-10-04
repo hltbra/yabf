@@ -43,6 +43,8 @@ array_is(eval_to_buffer("++"), [2], "++ increments position 0 to 2");
 array_is(eval_to_buffer(">+"), [0, 1], ">+ increments position 1 to 1");
 array_is(eval_to_buffer(">++"), [0, 2], ">++ increments position 1 to 2");
 
+array_is(eval_to_buffer("-"), [-1], "- decrements position 0 to -1");
+
 
 done_testing();
 

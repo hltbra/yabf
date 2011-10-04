@@ -40,6 +40,7 @@ sub evaluate {
             if (/>/) { $data_pointer++ }
             if (/</) { if ($data_pointer) { $data_pointer-- } }
             if (/\+/) { $buffer[$data_pointer]++ }
+            if (/-/) { $buffer[$data_pointer]-- }
         }
     }
     {data_pointer => $data_pointer,
