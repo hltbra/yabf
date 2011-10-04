@@ -3,7 +3,6 @@ package Yabf;
 use 5.010000;
 use strict;
 use warnings;
-use Switch;
 
 require Exporter;
 use AutoLoader qw(AUTOLOAD);
@@ -35,8 +34,9 @@ sub evaluate {
     my $data_pointer = 0;
     for (my $i = 0 ; $i < length $expr ; $i++)  {
         my $op = substr($expr, $i, 1);
-        switch ($op) {
-            case '>' { $data_pointer++ }
+        for ($op) {
+            if (/>/) { $data_pointer++ }
+            if (/</) { $data_pointer-- }
         }
     }
     $data_pointer;
