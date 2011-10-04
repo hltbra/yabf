@@ -36,7 +36,7 @@ sub evaluate {
         my $op = substr($expr, $i, 1);
         for ($op) {
             if (/>/) { $data_pointer++ }
-            if (/</) { $data_pointer-- }
+            if (/</) { if ($data_pointer) { $data_pointer-- } }
         }
     }
     $data_pointer;
