@@ -32,7 +32,7 @@ is_deeply(eval_to_buffer(">+"), [0, 1], ">+ increments position 1 to 1");
 is_deeply(eval_to_buffer(">++"), [0, 2], ">++ increments position 1 to 2");
 
 is_deeply(eval_to_buffer("-"), [-1], "- decrements position 0 to -1");
-is_deeply(eval_to_buffer(">-"), [0, -1], "- decrements position 1 to -1");
+is_deeply(eval_to_buffer(">-"), [0, -1], ">- decrements position 1 to -1");
 
 is_deeply(eval_to_buffer(">++-"), [0, 1], ">++- sets position 1 to 1");
 is_deeply(eval_to_buffer("+>+-<-"), [0, 0], "+>+-<- resets position 0 and 1");
