@@ -2,3 +2,11 @@ YABF
 ====
 
 Yet Another Brainfuck Interpreter
+
+
+What is it?
+===========
+
+It is my playground to write brainfuck interpreters in different languages.
+
+PS.: This project is not aimed for production.
