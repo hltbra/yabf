@@ -32,6 +32,8 @@ our $VERSION = '0.01';
 sub evaluate {
     my $expr = shift;
     my $data_pointer = 0;
+    my @buffer = (0);
+
     for (my $i = 0 ; $i < length $expr ; $i++)  {
         my $op = substr($expr, $i, 1);
         for ($op) {
@@ -39,7 +41,8 @@ sub evaluate {
             if (/</) { if ($data_pointer) { $data_pointer-- } }
         }
     }
-    (data_pointer => $data_pointer);
+    (data_pointer => $data_pointer,
+     buffer => @buffer);
 }
 
 
