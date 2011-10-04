@@ -39,6 +39,7 @@ sub evaluate {
         for ($op) {
             if (/>/) { $data_pointer++ }
             if (/</) { if ($data_pointer) { $data_pointer-- } }
+            if (/\+/) { $buffer[$i]++ }
         }
     }
     (data_pointer => $data_pointer,

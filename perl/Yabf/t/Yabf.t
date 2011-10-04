@@ -24,6 +24,7 @@ is(eval_to_data_pointer("<"), 0, "< does not shift to -1, but to 0");
 is(eval_to_data_pointer("><"), 0, ">< resets data pointer to 0");
 
 is(eval_to_buffer(""), (0), "position 0 starts with 0");
+is(eval_to_buffer("+"), (1), "+ increments position 0 to 1");
 
 done_testing();
 
