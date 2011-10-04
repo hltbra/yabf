@@ -42,8 +42,8 @@ sub evaluate {
             if (/\+/) { $buffer[$data_pointer]++ }
         }
     }
-    (data_pointer => $data_pointer,
-     buffer => @buffer);
+    {data_pointer => $data_pointer,
+     buffer => \@buffer};
 }
 
 
