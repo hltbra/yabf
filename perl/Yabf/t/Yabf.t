@@ -17,6 +17,12 @@ sub eval_to_buffer {
     $result->{buffer};
 }
 
+sub eval_to_output {
+    my $arg = shift;
+    my $result = Yabf::evaluate($arg);
+    $result->{output};
+}
+
 BEGIN { use_ok('Yabf'); }
 
 is(eval_to_data_pointer(""), 0, "data pointer starts at 0");
@@ -44,6 +50,16 @@ is_deeply(eval_to_buffer("+[>+<-]"), [0, 1], "+[>+<-] resets position 0 and incr
 is_deeply(eval_to_buffer("++[>+<-]"), [0, 2], "++[>+<-] should increment position 1 to 2");
 is_deeply(eval_to_buffer("++[[-]]"), [0], "nested reset");
 is_deeply(eval_to_buffer("++[[[[-]]]]"), [0], "four nested reset");
+
+is_deeply(eval_to_output(''), [], "output starts blank");
+
+is_deeply(eval_to_output('
+    +++++ +
+    [
+      > +++++ +++++
+      < -
+    ]
+    > +++++ .'), [65], "should output 65, the A character"); 
 
 
 done_testing();

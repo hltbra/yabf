@@ -34,6 +34,7 @@ sub evaluate {
     my $loops_deep = 0;
     my $data_pointer = 0;
     my @buffer = (0);
+    my @output = ();
 
     for (my $i = 0 ; $i < length $expr ; $i++)  {
         my $op = substr($expr, $i, 1);
@@ -58,10 +59,12 @@ sub evaluate {
                 }
                 $i--;
             }
+            when('.') { push @output, $buffer[$data_pointer] }
         }
     }
     {data_pointer => $data_pointer,
-     buffer => \@buffer};
+     buffer => \@buffer,
+     output => \@output};
 }
 
 
