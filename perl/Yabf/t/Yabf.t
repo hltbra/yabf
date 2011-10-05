@@ -3,7 +3,6 @@ use warnings;
 use 5.010;
 use Yabf;
 use Test::More;
-use Data::Dumper;
 
 sub eval_to_data_pointer {
     my $arg = shift;
