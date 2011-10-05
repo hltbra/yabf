@@ -31,6 +31,7 @@ our $VERSION = '0.01';
 
 sub evaluate {
     my $expr = shift;
+    my $loops_deep = 0;
     my $data_pointer = 0;
     my @buffer = (0);
 
@@ -38,15 +39,24 @@ sub evaluate {
         my $op = substr($expr, $i, 1);
         given ($op) {
             when ('>') { $data_pointer++ }
-            when ('<') { $data_pointer-- if ($data_pointer) }
+            when ('<') { $data_pointer-- if $data_pointer }
             when ('+') { $buffer[$data_pointer]++ }
             when ('-') { $buffer[$data_pointer]-- }
             when ('[') {
+                $loops_deep++ if $buffer[$data_pointer];
                 if ($buffer[$data_pointer] == 0) {
+                    $loops_deep--;
                     while (substr($expr, $i, 1) ne ']') {
                         $i++;
                     }
                 }
+            }
+            when(']') {
+                next if $loops_deep == 1 && $buffer[$data_pointer] == 0;
+                while ($loops_deep > 0 && substr($expr, $i, 1) ne '[') {
+                    $i--;
+                }
+                $i--;
             }
         }
     }

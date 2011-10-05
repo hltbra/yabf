@@ -41,6 +41,10 @@ is_deeply(eval_to_buffer("+[-]"), [0], "+[-] resets position 0 to 0");
 is_deeply(eval_to_buffer("[-]"), [0], "[-] does nothing (keep position 0 as 0)");
 is_deeply(eval_to_buffer("+[>+<-]"), [0, 1], "+[>+<-] resets position 0 and increments position 1");
 
+is_deeply(eval_to_buffer("++[>+<-]"), [0, 2], "++[>+<-] should increment position 1 to 2");
+is_deeply(eval_to_buffer("++[[-]]"), [0], "nested reset");
+is_deeply(eval_to_buffer("++[[[[-]]]]"), [0], "four nested reset");
+
 
 done_testing();
 
