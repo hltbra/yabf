@@ -61,6 +61,16 @@ is_deeply(eval_to_output('
     ]
     > +++++ .'), [65], "should output 65, the A character"); 
 
+is_deeply(eval_to_output('
+    +++++ +
+    [
+      > +++++ +++++
+      < -
+    ]
+    > +++++ .
+    + .
+    + .'), [65, 66, 67], "should output 65, 66 and 67 (the A, B and C characters)"); 
+
 
 done_testing();
 
