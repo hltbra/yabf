@@ -71,6 +71,10 @@ is_deeply(eval_to_output('
     + .
     + .'), [65, 66, 67], "should output 65, 66 and 67 (the A, B and C characters)"); 
 
+is_deeply(eval_to_output('
+ ++++++++++[>+++++++>++++++++++>+++>+<<<<-]>++.>+.+++++++..+++.>++.<<+++++++++++++++.>.+++.------.--------.>+.>.
+ '), [72, 101, 108, 108, 111, 32, 87, 111, 114, 108, 100, 33, 10], "should output 'Hello World!\n'");
+
 
 done_testing();
 
