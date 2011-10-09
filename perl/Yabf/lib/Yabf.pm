@@ -31,7 +31,8 @@ our $VERSION = '0.01';
 
 sub evaluate {
     my $expr = shift;
-    my $read_input = shift;
+    my $output_callback = shift;
+    my $read_callback = shift;
     my $loops_deep = 0;
     my $data_pointer = 0;
     my @buffer = (0);
@@ -60,13 +61,12 @@ sub evaluate {
                 }
                 $i--;
             }
-            when('.') { push @output, $buffer[$data_pointer] }
-            when(',') { $buffer[$data_pointer] = ord $read_input->() }
+            when('.') { $output_callback->($buffer[$data_pointer]) }
+            when(',') { $buffer[$data_pointer] = ord $read_callback->() }
         }
     }
     {data_pointer => $data_pointer,
-     buffer => \@buffer,
-     output => \@output};
+     buffer => \@buffer};
 }
 
 

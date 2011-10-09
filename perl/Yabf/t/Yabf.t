@@ -18,15 +18,10 @@ sub eval_to_buffer {
 
 sub eval_to_output {
     my $arg = shift;
-    my $result = Yabf::evaluate($arg);
-    $result->{output};
-}
-
-sub eval_to_output_using_fake_input {
-    my $arg = shift;
     my $fake_input = shift;
-    my $result = Yabf::evaluate($arg, sub { $fake_input });
-    $result->{output};
+    my @output = ();
+    my $result = Yabf::evaluate($arg, sub { push @output, shift }, sub { $fake_input });
+    \@output;
 }
 
 
@@ -82,8 +77,8 @@ is_deeply(eval_to_output('
  ++++++++++[>+++++++>++++++++++>+++>+<<<<-]>++.>+.+++++++..+++.>++.<<+++++++++++++++.>.+++.------.--------.>+.>.
  '), [72, 101, 108, 108, 111, 32, 87, 111, 114, 108, 100, 33, 10], "should output 'Hello World!\\n'");
 
-is_deeply(eval_to_output_using_fake_input(',.', "A"), [65], "should output letter 'A'");
-is_deeply(eval_to_output_using_fake_input(',+.', "B"), [67], "should output letter 'C'");
+is_deeply(eval_to_output(',.', "A"), [65], "should output letter 'A'");
+is_deeply(eval_to_output(',+.', "B"), [67], "should output letter 'C'");
 
 done_testing();
 
