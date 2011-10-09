@@ -24,7 +24,8 @@ sub eval_to_output {
 
 sub eval_to_output_using_fake_input {
     my $arg = shift;
-    my $result = Yabf::evaluate($arg, sub { "A" });
+    my $fake_input = shift;
+    my $result = Yabf::evaluate($arg, sub { $fake_input });
     $result->{output};
 }
 
@@ -82,6 +83,7 @@ is_deeply(eval_to_output('
  '), [72, 101, 108, 108, 111, 32, 87, 111, 114, 108, 100, 33, 10], "should output 'Hello World!\\n'");
 
 is_deeply(eval_to_output_using_fake_input(',.', "A"), [65], "should output letter 'A'");
+is_deeply(eval_to_output_using_fake_input(',+.', "B"), [67], "should output letter 'C'");
 
 done_testing();
 
