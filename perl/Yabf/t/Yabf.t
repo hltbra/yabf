@@ -79,7 +79,7 @@ is_deeply(eval_to_output('
 
 is_deeply(eval_to_output('
  ++++++++++[>+++++++>++++++++++>+++>+<<<<-]>++.>+.+++++++..+++.>++.<<+++++++++++++++.>.+++.------.--------.>+.>.
- '), [72, 101, 108, 108, 111, 32, 87, 111, 114, 108, 100, 33, 10], "should output 'Hello World!\n'");
+ '), [72, 101, 108, 108, 111, 32, 87, 111, 114, 108, 100, 33, 10], "should output 'Hello World!\\n'");
 
 is_deeply(eval_to_output_using_fake_input(',.', "A"), [65], "should output letter 'A'");
 
